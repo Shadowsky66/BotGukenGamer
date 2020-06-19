@@ -1,0 +1,16 @@
+{
+  "name": "bot-gukengamer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: notest specifed\\\" &&exit 1\""
+  },
+  "author": "ShadowSky",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^5.1.0",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  }
+}
