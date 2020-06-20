@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \\\"Error: notest specifed\\\" &&exit 1\""
+    "test": "jest",
+    "start": "node index.js"
   },
   "author": "ShadowSky",
   "license": "ISC",
@@ -12,5 +13,8 @@
     "commander": "^5.1.0",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
   }
 }
