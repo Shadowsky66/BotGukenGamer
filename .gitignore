@@ -15,4 +15,4 @@ node_modules
 npm-debug*
 
 # Application
-config.json
+.env
