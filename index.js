@@ -1,65 +1,97 @@
 const Discord = require("discord.js");
-
-const bot = new Discord.Client();
+const randomNumber = require("./lib/random");
 
 require("dotenv").config();
 
-let token = process.env.BOT_TOKEN;
-let prefix = process.env.BOT_PREFIX;
+const token = process.env.BOT_TOKEN;
+const prefix = process.env.BOT_PREFIX;
+const permissions = ['SEND_MESSAGES'];
 
-const randomNumber = require("lib/random");
+(async () => {
+  const bot = new Discord.Client();
 
-bot
-  .login(token)
-  .on("ready", () => {
-    console.log(`Запустился бот ${bot.user.username}`);
-    bot.generateInvite(["ADMINISTRATOR"]).then((link) => {
-      console.log(link);
-    });
-  })
-  .on("message", (msg) => {
-    if (!msg) {
-      return;
-    }
+  try {
+    console.log(`Trying authenticate with token ${token}`);
 
-    const args = msg.content.slice(prefix.length).trim().split(/\s/g);
-    const command = args.shift().toLowerCase();
+    await bot.login(token)
 
-    switch (command) {
-      case "hello": {
-        msg.reply("И тебе не хворать!");
-        break;
-      }
-      case "пёс": {
-        msg.reply(
-          "Паша, блять, ну ты же адекватный человек, нахуя оно тебе надо? Не доёбывай бота!"
-        );
-        break;
-      }
-      case "пес": {
-        msg.reply("Слышь псина, куда ты идёшь?");
-        break;
-      }
-      case "Паша": {
-        msg.reply("Паша пёс");
-        break;
-      }
-      case "roll": {
-        if (Array.isArray(args) && args.length == 2) {
-          msg.reply(randomNumber(args[0], args[1]));
-          break;
+    bot
+      .on("ready", () => {
+        console.log(`Authenticated successfully as ${bot.user.username}`);
+
+        bot
+          .generateInvite(permissions)
+          .then(console.log);
+      })
+      .on("message", (msg) => {
+        if (!msg) {
+          console.log(`Received empty message. Returning...`);
+
+          return;
         }
-        if (Array.isArray(args) && args.length == 1) {
-          msg.reply(randomNumber(1, args[0]));
-          break;
+
+        console.log(`Received message`, msg);
+
+        const args = msg.content.slice(prefix.length).trim().split(/\s/g);
+        const command = args.shift().toLowerCase();
+
+        console.log(`Trying to switch command ${command} with args`, args);
+
+        const reply = (content) => {
+          console.log(`Sending reply: ${content}`);
+
+          msg.reply(content)
+            .then(() => console.log(`Reply sent`))
+            .catch((e) => console.error(`Could not sent message`, e));
+        };
+
+        switch (command) {
+          case "hello": {
+
+            reply("И тебе не хворать!");
+            break;
+          }
+          case "пёс": {
+            reply(
+              "Паша, блять, ну ты же адекватный человек, нахуя оно тебе надо? Не доёбывай бота!"
+            );
+            break;
+          }
+          case "пес": {
+            reply("Слышь псина, куда ты идёшь?");
+            break;
+          }
+          case "паша": {
+            reply("Паша пёс");
+            break;
+          }
+          case "roll": {
+            if (Array.isArray(args) && args.length === 2) {
+              reply(randomNumber(args[0], args[1]));
+              break;
+            }
+            if (Array.isArray(args) && args.length === 1) {
+              reply(randomNumber(1, args[0]));
+              break;
+            }
+            reply(randomNumber());
+            break;
+          }
+          case "help": {
+            reply(
+              "Ну... я умею пока только псевдослучайные числа генерировать, воспользуйся командой !roll"
+            );
+            break;
+          }
+          default: {
+            console.log(`Command not found. Reply will not be sent`);
+            break;
+          }
         }
-        msg.reply(randomNumber());
-        break;
-      }
-      case "help": {
-        msg.reply(
-          "Ну... я умею пока только псевдослучайные числа генерировать, воспользуйся командой !roll"
-        );
-      }
-    }
-  });
+      });
+  } catch (e) {
+    console.error(`Could not authenticate or initialization failed. See error below`);
+    console.error(e);
+  }
+})();
+
