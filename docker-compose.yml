@@ -4,6 +4,7 @@ services:
     build:
       context: .
       args:
-        BOT_TOKEN: "${BOT_TOKEN}"
-        BOT_PREFIX: "${BOT_PREFIX}"
         NODE_VERSION: "${NODE_VERSION}"
+    environment:
+      BOT_TOKEN: "${BOT_TOKEN}"
+      BOT_PREFIX: "${BOT_PREFIX}"

@@ -23,9 +23,6 @@ ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # DOWNLOAD AND BUILD APPLICATION
-ARG BOT_TOKEN
-ARG BOT_PREFIX="!"
-
 WORKDIR srv
 
 RUN cd /srv \
@@ -33,4 +30,4 @@ RUN cd /srv \
     && npm install --only=production
     
 # LAUNCH APPLICATION
-CMD ["/bin/bash", "-c", "node", "index.js"]
+CMD ["npm", "run", "start"]
