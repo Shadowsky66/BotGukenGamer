@@ -4,7 +4,6 @@ services:
     build:
       context: .
       args:
-        SSH_PRIVATE_KEY: "${SSH_PRIVATE_KEY}"
         BOT_TOKEN: "${BOT_TOKEN}"
         BOT_PREFIX: "${BOT_PREFIX}"
         NODE_VERSION: "${NODE_VERSION}"

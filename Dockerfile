@@ -22,13 +22,6 @@ RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# AUTHENTICATE GITHUB ACCOUNT
-ARG SSH_PRIVATE_KEY
-
-RUN mkdir ~/.ssh \
-    && echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa \
-    && ssh-keyscan github.com >> /root/.ssh/known_hosts
-
 # DOWNLOAD AND BUILD APPLICATION
 ARG BOT_TOKEN
 ARG BOT_PREFIX="!"
@@ -36,7 +29,7 @@ ARG BOT_PREFIX="!"
 WORKDIR srv
 
 RUN cd /srv \
-    && git clone https://feronetick@github.com/Shadowsky66/BotGukenGamer.git . \
+    && git clone https://github.com/Shadowsky66/BotGukenGamer.git . \
     && npm install --only=production
     
 # LAUNCH APPLICATION
