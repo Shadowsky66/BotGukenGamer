@@ -3,8 +3,6 @@ services:
   bot:
     build:
       context: .
-      args:
-        NODE_VERSION: "${NODE_VERSION}"
     environment:
       BOT_TOKEN: "${BOT_TOKEN}"
-      BOT_PREFIX: "${BOT_PREFIX}"
+      DEFAULT_PREFIX: "${DEFAULT_PREFIX}"

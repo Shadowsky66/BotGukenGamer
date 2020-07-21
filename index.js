@@ -4,7 +4,7 @@ const randomNumber = require("./lib/random");
 require("dotenv").config();
 
 const token = process.env.BOT_TOKEN;
-const prefix = process.env.BOT_PREFIX;
+const prefix = process.env.DEFAULT_PREFIX;
 const permissions = ['SEND_MESSAGES'];
 
 (async () => {
