@@ -14,15 +14,15 @@ bot.on('ready', () => {
     });
 });
 
-function randonIntFix(min = 1, max = 100) {
+function randomNumber(min = 1, max = 100, random = Math.random) {
     min = Math.abs(Number(min));
     max = Math.abs(Number(max));
 
     if (isNaN(min) || isNaN(max)) {
-        return "Введи числа, я только их понимаю... пёс";
+        throw new Error("Введи числа, я только их понимаю... пёс");
     }
     if (min == Infinity || max == Infinity) {
-        return "Да ты ебанулся, я до стольки считать не умею";
+        throw new Error("Да ты ебанулся, я до стольки считать не умею");
     }
 
     return Math.floor(min + random() * (max + 1 - min));
@@ -42,16 +42,28 @@ bot.on('message', msg => {
             msg.reply('И тебе не хворать!');
             break;
         }
+        case 'пёс': {
+            msg.reply('Паша, блять, ну ты же адекватный человек, нахуя оно тебе надо? Не доёбывай бота!');
+            break;
+        }
+        case 'пес': {
+            msg.reply('Слышь псина, куда ты идёшь?');
+            break;
+        }
+        case 'Паша': {
+            msg.reply('Паша пёс');
+            break;
+        }
         case 'roll': {
             if (Array.isArray(args) && args.length == 2) {
-                msg.reply(randomIntFix(args[0], args[1]));
+                msg.reply(randomNumber(args[0], args[1]));
                 break;
             }
             if (Array.isArray(args) && args.length == 1) {
-                msg.reply(randomIntFix(1, args[0]));
+                msg.reply(randomNumber(1, args[0]));
                 break;
             }
-            msg.reply(randomIntFix());
+            msg.reply(randomNumber());
             break;
         }
         case 'help': {
