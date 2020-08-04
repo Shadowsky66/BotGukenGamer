@@ -1,4 +1,4 @@
-const randomNumber = require('../../lib/random.js');
+const randomNumber = require('../../commands/lib/randomNumber');
 
 test("При равных значениях, будет то же значение.", () => {
     expect(randomNumber(1, 1)).toBe(1);
