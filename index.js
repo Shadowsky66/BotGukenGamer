@@ -2,8 +2,7 @@ const Discord = require("discord.js");
 const Parser = require('./parser/parser');
 const Handler = require('./handler/handler');
 const Interactor = require('./interactor/interactor');
-var pathToFfmpeg = require('ffmpeg-static');
-var ytdl = require('ytdl-core');
+const fs = require('ffmpeg-static');
 require("dotenv").config();
 
 const token = process.env.BOT_TOKEN;
@@ -29,7 +28,7 @@ const interactor = new Interactor(parser, handler);
         .generateInvite(permissions)
         .then(console.log);
 
-      interactor.subscribe(bot, ytdl);
+      interactor.subscribe(bot);
     });
   }
 

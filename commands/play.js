@@ -1,10 +1,14 @@
-const execute = require('../lib/radio/execute');
-
 module.exports = {
-    pattern: /play/,
+    pattern: /radio/,
     description: 'trance - radio',
     handler: (params, message, guild) => {
 
-        message.reply('В разработке');
+        if (message.member.voice.channel) {
+            const connection = message.member.voice.channel.join().then((connection) => {
+                connection.play('http://air2.radiorecord.ru:805/tm_320');
+            })
+        } else {
+            message.reply('Ты в голосовой канал то зайди');
+        }
     },
 }

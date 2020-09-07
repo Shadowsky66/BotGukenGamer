@@ -1,11 +1,12 @@
 class Interactor {
 
-    constructor(parser, handler) {
+    constructor(parser, handler, audio) {
         this.handler = handler;
         this.parser = parser;
+        this.audio = audio;
     }
 
-    subscribe(bot, ytdl) {
+    subscribe(bot) {
 
         bot.on('message', (message) => {
             const { content, guild } = message;
@@ -14,22 +15,9 @@ class Interactor {
             if (this.parser.looksLikeCommand(content, guild)) {
                 const [command, ...params] = this.parser.parseCommand(content, guild.id);
 
-                this.handler.tryToHandleCommand(command, params, message, guild);
-
+                this.handler.tryToHandleCommand(command, params, message, guild, this.audio);
             }
-
-            if (message.member.voice.channel) {
-                const voiceChannel = message.member.voice.channel;
-            }
-
-            plays(voiceChannel);
-
         });
-
-        async function plays(voiceChannel) {
-            const connection = await voiceChannel.join();
-            connection.play('http://air2.radiorecord.ru:805/tm_320');
-        }
     }
 }
 
