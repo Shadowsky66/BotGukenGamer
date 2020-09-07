@@ -1,7 +1,10 @@
 # BotGukenGamer
 
-Роллящий бот для Discord.
+Бот для Discord.
 
+!radio - трансляция радио trancemission
+
+!stop - прекратить трансляцию
 
 !roll - случайное число от 1 до 100
 
