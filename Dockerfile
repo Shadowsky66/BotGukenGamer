@@ -10,4 +10,4 @@ RUN \
     echo "**** install dependencies ****" && \
     npm install --only=production
     
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start", "--prefix", "/srv"]

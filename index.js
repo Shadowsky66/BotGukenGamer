@@ -2,7 +2,8 @@ const Discord = require("discord.js");
 const Parser = require('./parser/parser');
 const Handler = require('./handler/handler');
 const Interactor = require('./interactor/interactor');
-const fs = require('ffmpeg-static');
+
+require('ffmpeg-static');
 require("dotenv").config();
 
 const token = process.env.BOT_TOKEN;
