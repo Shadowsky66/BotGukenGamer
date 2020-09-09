@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
-const Parser = require('./parser/parser');
-const Handler = require('./handler/handler');
-const Interactor = require('./interactor/interactor');
+const Parser = require('./parser');
+const Handler = require('./handler');
+const Interactor = require('./interactor');
 
 require('ffmpeg-static');
 require("dotenv").config();
@@ -17,6 +17,9 @@ const interactor = new Interactor(parser, handler);
 (async () => {
   const bot = new Discord.Client();
 
+  // В этой коллекции будем сохранять ссылки на StreamDispatcher для дальнейшей работы
+  bot.dispatchers = new Discord.Collection();
+
   try {
     console.log(`Попытка подключения с токеном: ${token}`);
 
@@ -31,10 +34,7 @@ const interactor = new Interactor(parser, handler);
 
       interactor.subscribe(bot);
     });
-  }
-
-  catch {
+  } catch {
     console.log('Не удалось подключится')
   }
-
 })();

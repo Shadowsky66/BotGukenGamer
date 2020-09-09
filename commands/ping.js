@@ -1,7 +1,7 @@
 module.exports = {
-    pattern: /ping/,
-    description: 'Ping!',
-    handler: (params, message, guildId) => {
-        message.reply('pong!' + ' ' + params);
-    },
+  pattern: /ping/,
+  description: '',
+  handler: (params, message) => {
+    message.reply(`pong! ${params}`);
+  },
 };

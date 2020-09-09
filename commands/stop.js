@@ -1,9 +1,11 @@
 module.exports = {
-    pattern: /stop/,
-    description: 'stop all',
-    handler: (params, message, guildId) => {
-        if (message.member.voice.channel) {
-            message.member.voice.channel.leave();
-        }
-    },
+  pattern: /stop/,
+  description: 'stop all',
+  handler: (params, message, client) => {
+    const dispatcher = client.dispatchers.get(message.guild.id);
+
+    if (dispatcher) {
+      dispatcher.destroy();
+    }
+  },
 }
