@@ -1,7 +1,9 @@
+const path = require('path')
+
 const Discord = require("discord.js");
-const Parser = require('./parser');
-const Handler = require('./handler');
-const Interactor = require('./interactor');
+const Parser = require('./lib/parser');
+const Handler = require('./lib/handler');
+const Interactor = require('./lib/interactor');
 
 require('ffmpeg-static');
 require("dotenv").config();
@@ -11,7 +13,7 @@ const prefix = process.env.DEFAULT_PREFIX;
 const permissions = ['SEND_MESSAGES', 'CONNECT', 'SPEAK'];
 
 const parser = new Parser(prefix);
-const handler = new Handler('./commands');
+const handler = new Handler(path.join(__dirname, 'lib', 'commands'));
 const interactor = new Interactor(parser, handler);
 
 (async () => {
